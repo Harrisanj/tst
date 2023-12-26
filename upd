@@ -35,24 +35,8 @@ log_info "Installing sqlite3 ..."
 log_info "Installing curl ..."
   sudo -E apt-get -y install curl
 
-log_info "Installing Redis ..."
-  cd /tmp && \
-    wget https://download.redis.io/redis-stable.tar.gz && \
-    tar -xzvf redis-stable.tar.gz && \
-    cd redis-stable && \
-    make && \
-    sudo -E make install
-  cd /tmp && \
-    rm redis-stable.tar.gz && \
-    rm -Rf redis-stable
-
-  sudo adduser --system --group --no-create-home redis
-  FILE="/etc/systemd/system/redis-server.service"
-  if [ ! -f "$FILE" ]; then
-    sudo bash -c "cat > $FILE" <<EOF
 [Unit]
-Description=redis in-memory data store
-After=network.target
+
 
 [Service]
 
